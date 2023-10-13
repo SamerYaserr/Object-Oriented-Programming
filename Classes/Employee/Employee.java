@@ -1,102 +1,30 @@
-import java.util.Scanner;
-
 public class Employee {
 
-    private String name;
-    private String emailAddress;
-    private String phone;
-    private String department;
-    private String address;
-    private int yearOfBirth;
+    private int id;
+    private static int count;
     private float salary;
+    private PersonalInformation personalInfo;
+    private Department dept;
 
     public Employee() {
-
-        Scanner in = new Scanner( System.in );
-
-        System.out.println("Please enter your data:");
-
-        System.out.println("name:");
-        name = in.next();
-
-        System.out.println("emailAddress:");
-        emailAddress = in.next();
-
-        System.out.println("phone:");
-        phone = in.next();
-
-        System.out.println("department:");
-        department = in.next();
-
-        System.out.println("address:");
-        address = in.next();
-
-        System.out.println("yearOfBirth:");
-        yearOfBirth = in.nextInt();
-
-        System.out.println("salary:");
-        salary = in.nextFloat();
-
+        System.out.println("No data.");
     }
 
-    public Employee(String name, String emailAddress, String phone, String department, String address, int yearOfBirth, float salary) {
+    public Employee( float salary, String firstName, String middleName, String lastName, String bloodGroup, String accountNumber, String nationality, int yearOfBirth , Department dept) {
 
-        this.name = name;
-        this.emailAddress = emailAddress;
-        this.phone = phone;
-        this.department = department;
-        this.address = address;
-        this.yearOfBirth = yearOfBirth;
+        this.id = count++;
         this.salary = salary;
+        this.personalInfo = new PersonalInformation( firstName, middleName, lastName, bloodGroup, accountNumber, nationality, yearOfBirth);
+        this.dept = dept;
 
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getYearOfBirth() {
-        return yearOfBirth;
-    }
-
-    public void setYearOfBirth(int yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public float getSalary() {
@@ -107,18 +35,30 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String toString() {
-        return "Developer{" +
-                "name='" + name + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", phone='" + phone + '\'' +
-                ", department='" + department + '\'' +
-                ", address='" + address + '\'' +
-                ", yearOfBirth=" + yearOfBirth +
-                ", salary=" + salary +
-                '}';
+    public PersonalInformation getPersonalInfo() {
+        return personalInfo;
     }
 
+    public void setPersonalInfo(PersonalInformation personalInfo) {
+        this.personalInfo = personalInfo;
+    }
 
+    public Department getDept() {
+        return dept;
+    }
 
+    public void setDept(Department dept) {
+        this.dept = dept;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Employee{" +
+                "id=" + id +
+                ", salary=" + salary +
+                ", personalInfo=" + personalInfo +
+                ", dept=" + dept +
+                '}';
+    }
 }
