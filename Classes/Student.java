@@ -2,25 +2,33 @@ import java.util.Scanner;
 
 public class Student {
 
-    private int id;
+    private final int STUDENT_ID;
     private String name;
     private String password;
     private boolean loggedIn;
     static private int count = 1;
     static private String collage = "Mansoura";
     static private int minimalPasswordLength = 6;
+    private final static int DEGREE_OF_SUCCESS = 55;
 
-    Student( String name , String password){
+    public Student() {
+
+        this.STUDENT_ID = count++;
+        System.out.println("No data!");
+
+    }
+
+    Student(String name , String password){
+
+        this.STUDENT_ID = count++;
 
         if( validatePassword(password) ){
 
-            this.id = count;
             this.name = name;
             this.password = password;
 
-            System.out.println("Hello " + name + ", Your Id=" + id + ".");
+            System.out.println("Hello " + name + ", Your id=" + STUDENT_ID + ".");
 
-            count++;
         }else{
             System.out.println("Error, The minimal length of the password is 6.");
         }
@@ -46,7 +54,7 @@ public class Student {
 
     public boolean logIn( int id , String password ){
 
-        if( this.id == id && this.password.equals( password ) ){
+        if( this.STUDENT_ID == id && this.password.equals( password ) ){
 
             System.out.println("You are logged in.");
             loggedIn = true;
@@ -67,7 +75,7 @@ public class Student {
     }
 
     public int getId() {
-        return id;
+        return STUDENT_ID;
     }
 
     public static String getCollage() {
@@ -97,7 +105,7 @@ public class Student {
 
         return  "Student{" +
                 "Nmae:'" + name + '\'' +
-                ", Id=" + id +
+                ", Id=" + STUDENT_ID +
                 ", Collage:'" + collage + '\'' +
                 "}";
 
