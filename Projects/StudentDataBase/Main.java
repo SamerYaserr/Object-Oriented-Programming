@@ -1,30 +1,104 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
+public class Student {
+
+    private String firstName;
+    private String lastName;
+    private  Grade gradeYear;
+    private String studentId;
+    private double balance;
+    private static int currentId[] = new int[] {1000 , 1000 , 1000 , 1000};
+    ArrayList<Courses> courses = new ArrayList<>();
+    private final static int COST_OF_COURSE = 600;
+
+
+
+
+    public Student(  ){
 
         Scanner in = new Scanner( System.in );
 
-        int numberOfNewStudent;
+        System.out.print("Enter student first name:");
+        this.firstName = in.nextLine();
 
-        System.out.print("Enter number of new student to enroll:");
-        numberOfNewStudent = in.nextInt();
+        System.out.print("Enter student last name:");
+        this.lastName = in.nextLine();
 
-        Student [] students = new Student[ numberOfNewStudent ];
-        for( int i = 0 ; i < numberOfNewStudent ; i++){
+        System.out.print("1- Freshmen\n2- Sophmore\n3- Junior\n4- Senior\nEnter student grade year:");
+        int action = in.nextInt();
 
-            System.out.println("Student " + (i + 1) + ":" );
-            students[i] = new Student();
-            students[i].courseEnrolling();
-            students[i].payTuition();
-            System.out.println("---------------------------------------");
+        for( Grade checkGrade : Grade.values() ){
+
+            if(action == checkGrade.getToInt())
+                gradeYear = checkGrade;
 
         }
 
-        for( Student student : students ){
-            student.statusOfStudent();
-            System.out.println("---------------------------------------");
+        currentId[ gradeYear.getToInt() - 1 ]++;
+        createId();
+
+
+    }
+
+    private void createId( ){
+
+        this.studentId = gradeYear.getToInt() + ""  + currentId[ gradeYear.getToInt() - 1 ];
+
+    }
+
+    public void courseEnrolling(){
+
+        Scanner in = new Scanner( System.in );
+        int action;
+
+        System.out.println("For each course (Enter 1 if you want to enroll otherwise enter 0):");
+
+        for( Courses checkCourse : Courses.values() ){
+
+            System.out.print ( checkCourse.toString() + ":");
+            action = in.nextInt();
+
+            if( action == 1 ){
+                balance += COST_OF_COURSE;
+                courses.add( checkCourse );
+            }
+
         }
 
     }
+
+    public void viewBalance(){
+
+        System.out.println("Your current balance: " + balance );
+
+    }
+
+    public void payTuition( ){
+
+        viewBalance();
+
+        Scanner in = new Scanner( System.in );
+
+        System.out.print("Enter your payment: ");
+        double amount = in.nextDouble();
+
+        balance -= amount;
+
+        viewBalance();
+
+    }
+
+    public void statusOfStudent(){
+
+        System.out.println("Name: " + firstName + " " + lastName );
+        System.out.println("Student grade level: " + gradeYear.toString() );
+        System.out.println("Student id= " + studentId );
+        System.out.println("Student courses: " + courses );
+        System.out.println("Student balance= " +  balance );
+
+    }
+
+
+
 }
